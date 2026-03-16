@@ -1,0 +1,204 @@
+{% extends 'base/base.html' %}
+
+{% block title %}VaultVest | Institutional-Grade Wealth Terminal{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden pt-16 pb-32">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[500px] bg-gradient-to-b from-indigo-100/50 to-transparent blur-[120px] rounded-full -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center space-y-10 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200/50 shadow-sm text-[10px] font-black text-slate-500 uppercase tracking-widest animate-fade-in">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                Institutional Node v2.4 <span class="mx-2 text-slate-300">|</span> <span class="text-indigo-600">Active Liquidity</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-9xl font-black text-slate-900 tracking-tighter leading-[0.85] lg:px-10">
+                Wealth, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-b from-indigo-600 to-blue-700">Automated.</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-slate-500 font-medium leading-relaxed max-w-3xl mx-auto">
+                The high-performance terminal for institutional crypto yields and automated asset liquidation. Secure, transparent, and built for scale.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                <a href="{% url 'register' %}" class="w-full sm:w-auto px-12 py-6 bg-slate-900 text-white font-black rounded-[2rem] shadow-2xl shadow-indigo-200 hover:bg-indigo-600 hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group">
+                    Enter Terminal
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="{% url 'dashboard' %}" class="w-full sm:w-auto px-12 py-6 bg-white/50 backdrop-blur-md border border-slate-200 text-slate-900 font-black rounded-[2rem] hover:bg-white transition-all flex items-center justify-center gap-2 uppercase text-[11px] tracking-widest">
+                    Dashboard
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-24 relative max-w-6xl mx-auto group">
+            <div class="absolute -inset-4 bg-gradient-to-r from-indigo-500/10 to-blue-500/10 rounded-[4rem] blur-2xl group-hover:opacity-40 transition duration-1000"></div>
+            <div class="relative glass-card rounded-[3rem] border border-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] overflow-hidden p-2">
+                <div class="bg-slate-50/50 rounded-[2.5rem] overflow-hidden">
+                    <div class="flex items-center justify-between px-8 py-5 border-b border-white/50">
+                        <div class="flex gap-2.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-slate-200"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-slate-200"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-slate-200"></div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/80 px-4 py-1.5 rounded-full border border-slate-100 shadow-sm">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">vault-protocol-secured</span>
+                        </div>
+                        <div class="w-16"></div>
+                    </div>
+                    
+                    <div class="p-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div class="md:col-span-8 space-y-8">
+                            <div class="bg-white p-10 rounded-[2.5rem] border border-white shadow-sm">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Vault AUM</p>
+                                        <h2 class="text-5xl font-black text-slate-900 tracking-tighter">$142,850.12</h2>
+                                    </div>
+                                    <span class="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-xs font-black">+14.2%</span>
+                                </div>
+                                <div class="h-40 w-full">
+                                    <svg viewBox="0 0 100 30" class="w-full h-full overflow-visible">
+                                        <path d="M0 28 Q 15 25, 30 15 T 50 18 T 70 5 T 100 2" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" class="animate-draw" />
+                                        <path d="M0 28 Q 15 25, 30 15 T 50 18 T 70 5 T 100 2 V 30 H 0 Z" fill="url(#hero-gradient)" opacity="0.1" />
+                                        <defs>
+                                            <linearGradient id="hero-gradient" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%" stop-color="#4f46e5" />
+                                                <stop offset="100%" stop-color="white" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-4 h-full">
+                            <div class="bg-slate-900 p-8 rounded-[2.5rem] h-full border border-slate-800 text-slate-300 font-mono text-[11px] flex flex-col justify-between shadow-2xl shadow-indigo-900/40">
+                                <div class="flex items-center justify-between text-indigo-400">
+                                    <span class="font-black text-xs">TERMINAL_LOG</span>
+                                    <span class="flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
+                                </div>
+                                <div class="space-y-3 py-6">
+                                    <p class="text-slate-500">> sync_mkt_data... <span class="text-emerald-400">OK</span></p>
+                                    <p class="text-slate-400">> block_height: <span class="text-white">#843,221</span></p>
+                                    <p class="text-slate-400">> network_load: <span class="text-indigo-400">0.04ms</span></p>
+                                    <p class="text-slate-500">> yield_optimization... <span class="text-indigo-400">RUNNING</span></p>
+                                </div>
+                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-indigo-500 h-full w-3/4 animate-progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="explore" class="py-32 bg-white relative">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
+            <div class="max-w-2xl">
+                <nav class="text-[11px] font-black text-indigo-600 uppercase tracking-[0.3em] mb-4">Market Coverage</nav>
+                <h2 class="text-4xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">
+                    Trade the <span class="text-slate-400">Global</span> Markets.
+                </h2>
+                <p class="mt-8 text-xl text-slate-500 font-medium">
+                    Access institutional liquidity across 2,000+ crypto pairs, equities, and commodities with instant settlement.
+                </p>
+            </div>
+            <div class="flex items-center gap-4 bg-slate-50 p-2 rounded-2xl border border-slate-100">
+                <button class="px-6 py-3 bg-white shadow-sm rounded-xl text-xs font-black uppercase tracking-widest text-slate-900">Crypto</button>
+                <button class="px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-colors">Equities</button>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-[3rem] p-4 h-[600px] border border-slate-200/60 shadow-2xl shadow-slate-200/50">
+            <div class="tradingview-widget-container h-full w-full">
+                <div class="tradingview-widget-container__widget h-full w-full"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "defaultColumn": "overview",
+                  "screener_type": "crypto_mkt",
+                  "displayCurrency": "USD",
+                  "colorTheme": "light",
+                  "locale": "en",
+                  "isTransparent": true
+                }
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center space-y-2">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Quarterly Volume</p>
+                <h4 class="text-4xl font-black text-slate-900 tracking-tighter">$2.4B+</h4>
+            </div>
+            <div class="text-center space-y-2 border-l border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Active Nodes</p>
+                <h4 class="text-4xl font-black text-slate-900 tracking-tighter">142</h4>
+            </div>
+            <div class="text-center space-y-2 border-l border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Avg Settlement</p>
+                <h4 class="text-4xl font-black text-slate-900 tracking-tighter">0.4s</h4>
+            </div>
+            <div class="text-center space-y-2 border-l border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Compliance</p>
+                <h4 class="text-4xl font-black text-emerald-500 tracking-tighter">100%</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="bg-slate-50 py-32 rounded-[4rem] mx-4">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="space-y-6">
+                <div class="w-16 h-16 bg-white shadow-xl rounded-2xl flex items-center justify-center text-indigo-600">
+                    <i data-lucide="snowflake" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight">Cold Vault Storage</h3>
+                <p class="text-slate-500 leading-relaxed font-medium">Multi-sig offline architecture protecting 98% of assets against any network intrusion.</p>
+            </div>
+            <div class="space-y-6">
+                <div class="w-16 h-16 bg-white shadow-xl rounded-2xl flex items-center justify-center text-emerald-600">
+                    <i data-lucide="zap" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight">Liquid Engines</h3>
+                <p class="text-slate-500 leading-relaxed font-medium">Instant conversion for gift cards and crypto assets with zero slippage or fee spikes.</p>
+            </div>
+            <div class="space-y-6">
+                <div class="w-16 h-16 bg-white shadow-xl rounded-2xl flex items-center justify-center text-blue-600">
+                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight">Tier-1 Compliance</h3>
+                <p class="text-slate-500 leading-relaxed font-medium">AES-256 encryption and PCI-compliant processing for every transaction on the network.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .animate-draw {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: draw 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes progress { 0% { width: 0%; } 100% { width: 75%; } }
+    .animate-progress { animation: progress 2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+</style>
+{% endblock %}

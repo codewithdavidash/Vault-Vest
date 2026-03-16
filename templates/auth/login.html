@@ -1,0 +1,160 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 animate-in fade-in duration-700 bg-white">
+
+    <div class="flex items-center justify-center p-8 md:p-16 bg-white relative">
+        <div class="absolute top-8 left-8 lg:hidden flex items-center gap-2">
+            <div class="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center text-white">
+                <i data-lucide="vault" class="w-3 h-3"></i>
+            </div>
+            <span class="font-black text-slate-900 tracking-tighter">VaultVest</span>
+        </div>
+
+        <div class="w-full max-w-md space-y-10">
+            <div class="space-y-3">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter">Access <span
+                        class="text-indigo-600">Node.</span></h2>
+                <p class="text-slate-500 font-medium text-lg tracking-tight">Enter your credentials to unlock the
+                    terminal.</p>
+            </div>
+
+            {% if messages %}
+            <div class="space-y-3">
+                {% for message in messages %}
+                <div
+                    class="p-4 bg-rose-50 border border-rose-100 rounded-2xl flex gap-3 animate-in slide-in-from-top-2 duration-300">
+                    <i data-lucide="shield-alert" class="w-5 h-5 text-rose-500 shrink-0"></i>
+                    <p class="text-sm font-bold text-rose-600">{{ message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                <div class="space-y-2 group">
+                    <label
+                        class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 transition-colors group-focus-within:text-indigo-600">Identity
+                        (Username)</label>
+                    <div class="relative">
+                        <i data-lucide="fingerprint"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="text" name="username" placeholder="Enter node ID" required
+                            class="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-4 rounded-2xl focus:ring-4 ring-indigo-500/5 focus:border-indigo-500 focus:bg-white outline-none transition-all font-bold text-slate-900 placeholder:text-slate-300">
+                    </div>
+                </div>
+
+                <div class="space-y-2 group">
+                    <div class="flex justify-between items-end mb-1">
+                        <label
+                            class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 transition-colors group-focus-within:text-indigo-600">Access
+                            Keyphrase</label>
+                        <a href="#"
+                            class="text-[10px] font-black text-indigo-600 hover:text-indigo-700 uppercase tracking-tighter">Reset
+                            Key?</a>
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="key-round"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="password" name="password" placeholder="••••••••••••" required
+                            class="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-4 rounded-2xl focus:ring-4 ring-indigo-500/5 focus:border-indigo-500 focus:bg-white outline-none transition-all font-bold text-slate-900 placeholder:text-slate-300">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit"
+                        class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-black py-5 rounded-2xl shadow-2xl shadow-indigo-100 transition-all transform active:scale-[0.98] flex items-center justify-center gap-3">
+                        Unlock Secure Vault
+                        <i data-lucide="unlocked" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="pt-6 border-t border-slate-100">
+                <p class="text-center text-sm text-slate-500 font-medium">
+                    Not a registered entity? <a href="{% url 'register' %}"
+                        class="text-indigo-600 font-black hover:text-indigo-700">Initialize Node</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="hidden lg:flex bg-slate-50 items-center justify-center p-20 relative overflow-hidden border-l border-slate-100">
+        <div class="absolute inset-0 opacity-40">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:40px_40px]">
+            </div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-lg space-y-12">
+            <div
+                class="bg-white/80 backdrop-blur-xl border border-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] p-10 rounded-[3rem]">
+                <div class="flex items-center gap-4 mb-10">
+                    <div
+                        class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 shadow-sm">
+                        <i data-lucide="shield-check" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-900 tracking-tight">System Integrity</h3>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Protocol: Active</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <p class="text-slate-600 font-medium leading-relaxed">
+                        Session protection is active. Every transaction on <span
+                            class="text-slate-900 font-bold">VaultVest</span> is verified through multi-signature cold
+                        custody protocols.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-50/50 p-5 rounded-3xl border border-slate-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Uptime</p>
+                            </div>
+                            <p class="text-2xl font-black text-slate-900">99.98<span
+                                    class="text-sm text-slate-400">%</span></p>
+                        </div>
+                        <div class="bg-slate-50/50 p-5 rounded-3xl border border-slate-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Security</p>
+                            </div>
+                            <p class="text-2xl font-black text-slate-900">AES<span
+                                    class="text-sm text-slate-400">-256</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-10 border-t border-slate-100 flex items-center justify-between">
+                    <div class="flex -space-x-3">
+                        <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+                        <div class="w-8 h-8 rounded-full border-2 border-white bg-indigo-100"></div>
+                        <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-900"></div>
+                    </div>
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Verified by 4,000+ Nodes
+                    </p>
+                </div>
+            </div>
+
+            <a href="https://wa.me/15419563747">
+                <div
+                    class="bg-indigo-600 rounded-3xl p-8 text-white shadow-xl shadow-indigo-200 flex items-center justify-between group cursor-pointer hover:bg-indigo-700 transition-all">
+                    <div>
+                        <h4 class="font-black text-lg">Need Assistance?</h4>
+                        <p class="text-indigo-100 text-xs font-medium">Connect with our 24/7 Priority Support.</p>
+                    </div>
+                    <div
+                        class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-white group-hover:text-indigo-600 transition-all">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

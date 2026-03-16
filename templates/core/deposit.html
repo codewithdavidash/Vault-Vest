@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Assets | VaultVest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .nav-pills .nav-link { color: #64748b; border: 1px solid #e2e8f0; margin-right: 10px; border-radius: 12px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; }
+        .nav-pills .nav-link.active { background-color: #4f46e5; border-color: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
+        .card { border-radius: 24px; border: none; }
+        .form-control, .form-select { border-radius: 12px; padding: 14px; border: 1px solid #e2e8f0; background-color: #fdfdfd; }
+        .form-control:focus { border-color: #4f46e5; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
+        .address-box { background: #f1f5f9; border: 1px dashed #cbd5e1; position: relative; }
+        .copy-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-lg p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <div class="mb-2"><i class="bi bi-wallet2 text-primary" style="font-size: 2rem;"></i></div>
+                    <h3 class="fw-bold text-dark">Add Funds</h3>
+                    <p class="text-muted small">Select your preferred asset liquidation method</p>
+                </div>
+
+                <ul class="nav nav-pills mb-4 justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="crypto-tab" data-bs-toggle="pill" data-bs-target="#crypto-pane" type="button">
+                            <i class="bi bi-currency-bitcoin me-1"></i> Crypto
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="giftcard-tab" data-bs-toggle="pill" data-bs-target="#giftcard-pane" type="button">
+                            <i class="bi bi-gift me-1"></i> Gift Card
+                        </button>
+                    </li>
+                </ul>
+
+                <form method="POST" enctype="multipart/form-data" id="depositForm">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="gateway" id="gatewayField" value="CRYPTO">
+                    
+                    <div class="tab-content" id="pills-tabContent">
+                        
+                        <div class="tab-pane fade show active" id="crypto-pane">
+                            <div class="bg-light p-4 rounded-4 mb-4 border border-white shadow-sm">
+                                <label class="small fw-bold text-muted mb-2 d-block tracking-widest uppercase" style="font-size: 10px;">Select Currency</label>
+                                <select class="form-select shadow-sm mb-3" name="crypto_type" onchange="updateWallet(this)">
+                                    {% for code, data in wallets.items %}
+                                        <option value="{{ code }}" data-addr="{{ data.address }}">{{ code }} ({{ data.network }})</option>
+                                    {% endfor %}
+                                </select>
+                                
+                                <div class="address-box p-3 rounded-3 text-center">
+                                    <p class="text-muted small mb-1">Send to this address:</p>
+                                    <div class="d-flex align-items-center justify-content-center px-4">
+                                        <code id="walletAddressDisplay" class="fw-bold text-primary break-all" style="font-size: 0.85rem;">
+                                            {% for code, data in wallets.items %}{% if forloop.first %}{{ data.address }}{% endif %}{% endfor %}
+                                        </code>
+                                        <button type="button" class="btn btn-link text-primary p-0 ms-2" onclick="copyAddress()" title="Copy Address">
+                                            <i class="bi bi-clipboard"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="giftcard-pane">
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Card Issuer</label>
+                                <select class="form-select" name="card_type">
+                                    <option value="" selected disabled>Choose a card brand...</option>
+                                    {% for card in gift_cards %}<option value="{{ card }}">{{ card }}</option>{% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Claim Code / PIN</label>
+                                <input type="text" name="card_code" class="form-control" placeholder="XXXX-XXXX-XXXX">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Amount to Fund ($)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0 text-muted">$</span>
+                            <input type="number" name="amount" step="0.01" class="form-control border-start-0" placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold">Proof of Payment</label>
+                        <input type="file" name="proof_image" class="form-control" accept="image/*" required>
+                        <div class="form-text text-muted" style="font-size: 10px;">
+                            <i class="bi bi-info-circle me-1"></i>Upload a screenshot of your successful transfer or card receipt.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow border-0" style="background: #4f46e5;">
+                        Complete Deposit
+                    </button>
+                </form>
+            </div>
+            
+            <p class="text-center mt-4 text-muted small">
+                <i class="bi bi-shield-lock-fill me-1 text-success"></i> End-to-end Encrypted Verification
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Update Wallet Address Display
+    function updateWallet(select) {
+        const addr = select.options[select.selectedIndex].getAttribute('data-addr');
+        document.getElementById('walletAddressDisplay').innerText = addr;
+    }
+
+    // Copy to clipboard function
+    function copyAddress() {
+        const text = document.getElementById('walletAddressDisplay').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Address copied to clipboard!");
+        });
+    }
+
+    // Toggle hidden 'gateway' field based on active tab
+    const gatewayField = document.getElementById('gatewayField');
+    
+    document.getElementById('crypto-tab').addEventListener('shown.bs.tab', function () {
+        gatewayField.value = 'CRYPTO';
+    });
+
+    document.getElementById('giftcard-tab').addEventListener('shown.bs.tab', function () {
+        gatewayField.value = 'GIFTCARD';
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 animate-in fade-in duration-700 bg-white">
+    
+    <div class="flex items-center justify-center p-8 md:p-16 bg-white relative">
+        <div class="absolute top-8 left-8 lg:hidden flex items-center gap-2">
+            <div class="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center text-white">
+                <i data-lucide="vault" class="w-3 h-3"></i>
+            </div>
+            <span class="font-black text-slate-900 tracking-tighter">VaultVest</span>
+        </div>
+
+        <div class="w-full max-w-md space-y-10">
+            <div class="space-y-3">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter">Initialize <span class="text-indigo-600">Node.</span></h2>
+                <p class="text-slate-500 font-medium text-lg tracking-tight">Access institutional asset management tools.</p>
+            </div>
+
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="space-y-2 group">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 transition-colors group-focus-within:text-indigo-600">Full Name / Entity</label>
+                    <div class="relative">
+                        <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="text" name="username" placeholder="Enter full name" required 
+                            class="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-4 rounded-2xl focus:ring-4 ring-indigo-500/5 focus:border-indigo-500 focus:bg-white outline-none transition-all font-bold text-slate-900 placeholder:text-slate-300">
+                    </div>
+                </div>
+
+                <div class="space-y-2 group">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 transition-colors group-focus-within:text-indigo-600">Terminal Email</label>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="email" name="email" placeholder="name@institutional.com" required 
+                            class="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-4 rounded-2xl focus:ring-4 ring-indigo-500/5 focus:border-indigo-500 focus:bg-white outline-none transition-all font-bold text-slate-900 placeholder:text-slate-300">
+                    </div>
+                </div>
+
+                <div class="space-y-2 group">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 transition-colors group-focus-within:text-indigo-600">Secure Access Key</label>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="password" name="password" placeholder="••••••••••••" required 
+                            class="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-4 rounded-2xl focus:ring-4 ring-indigo-500/5 focus:border-indigo-500 focus:bg-white outline-none transition-all font-bold text-slate-900 placeholder:text-slate-300">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-black py-5 rounded-2xl shadow-2xl shadow-indigo-100 transition-all transform active:scale-[0.98] flex items-center justify-center gap-3">
+                        Deploy My Terminal
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="pt-6 border-t border-slate-100">
+                <p class="text-center text-sm text-slate-500 font-medium">
+                    Already registered? <a href="{% url 'login' %}" class="text-indigo-600 font-black hover:text-indigo-700">Access Node</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden lg:flex bg-slate-50 items-center justify-center p-20 relative overflow-hidden border-l border-slate-100">
+        <div class="absolute inset-0 opacity-40">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:30px_30px]"></div>
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white rounded-full blur-[120px]"></div>
+
+        <div class="relative z-10 w-full max-w-lg space-y-12">
+            <div class="bg-white/80 backdrop-blur-xl border border-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] p-10 rounded-[3rem]">
+                <div class="flex items-center gap-2 mb-10">
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                        <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                        <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                    </div>
+                    <div class="ml-auto flex items-center gap-2 px-3 py-1.5 bg-emerald-50 rounded-full border border-emerald-100">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-[10px] font-black text-emerald-600 uppercase tracking-[0.1em]">Network: Optimal</span>
+                    </div>
+                </div>
+
+                <div class="space-y-6 font-mono">
+                    <div class="flex justify-between items-center text-[11px]">
+                        <span class="text-slate-400 font-bold uppercase tracking-widest">Protocol Sync</span>
+                        <span class="text-indigo-600 font-black">99.98%</span>
+                    </div>
+                    <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-500 w-[85%] rounded-full shadow-[0_0_12px_rgba(79,70,229,0.4)]"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <p class="text-[9px] text-slate-400 font-black uppercase mb-1">Latency</p>
+                            <p class="text-sm font-bold text-slate-900">0.004ms</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <p class="text-[9px] text-slate-400 font-black uppercase mb-1">Security</p>
+                            <p class="text-sm font-bold text-slate-900">AES-256</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-10 border-t border-slate-100">
+                    <p class="text-slate-800 font-bold text-xl leading-tight tracking-tight">"VaultVest delivers the speed of a trading desk with the security of a private bank."</p>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center font-black text-white text-sm">MW</div>
+                        <div>
+                            <p class="text-sm font-black text-slate-900 leading-none mb-1">Marcus Wright</p>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Institutional Lead</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8 px-6">
+                <div class="flex items-center gap-5 group">
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-indigo-600 transition-transform group-hover:-translate-y-1">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-black text-sm uppercase tracking-tight">Bank-Grade Custody</h4>
+                        <p class="text-slate-500 text-xs font-medium">98% Cold storage architecture.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-5 group">
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-emerald-600 transition-transform group-hover:-translate-y-1">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 font-black text-sm uppercase tracking-tight">Instant Liquidation</h4>
+                        <p class="text-slate-500 text-xs font-medium">Zero-slippage asset conversion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+Asset Type,Provider/Method,Settlement Time
+Crypto (BTC/ETH/USDT),BitPay or Coinbase Commerce API,~10–20 mins (Network dependent)
+Gift Cards,"Specialized Liquidity API (e.g., Reloadly or TCH)",1–5 mins (OCR & Manual Verification)

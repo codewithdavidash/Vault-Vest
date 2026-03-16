@@ -1,0 +1,64 @@
+<aside id="main-sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-sm">
+    <div class="flex flex-col h-full p-6">
+        
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white shrink-0 shadow-lg shadow-indigo-200">
+                <i data-lucide="vault" class="w-4 h-4"></i>
+            </div>
+            <span class="text-xl font-black text-slate-900 tracking-tighter">VaultVest</span>
+        </div>
+
+        <nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 ml-2">Main Menu</p>
+            
+            <a href="{% url 'dashboard' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all {% if request.resolver_match.url_name == 'dashboard' %}bg-indigo-50 text-indigo-600{% else %}text-slate-500 hover:bg-slate-50{% endif %}">
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                <span class="text-sm">Portfolio</span>
+            </a>
+
+            <a href="{% url 'unified_deposit' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all {% if request.resolver_match.url_name == 'unified_deposit' %}bg-indigo-50 text-indigo-600{% else %}text-slate-500 hover:bg-slate-50{% endif %}">
+                <i data-lucide="plus-circle" class="w-5 h-5"></i>
+                <span class="text-sm">Add Funds</span>
+            </a>
+
+            <a href="{% url 'transaction_history' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all {% if request.resolver_match.url_name == 'transaction_history' %}bg-indigo-50 text-indigo-600{% else %}text-slate-500 hover:bg-slate-50{% endif %}">
+                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                <span class="text-sm">Transactions</span>
+            </a>
+
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-8 mb-4 ml-2">System</p>
+
+            <a href="{% url 'kyc_upload' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all {% if request.resolver_match.url_name == 'kyc_upload' %}bg-indigo-50 text-indigo-600{% else %}text-slate-500 hover:bg-slate-50{% endif %}">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                <span class="text-sm">Identity (KYC)</span>
+            </a>
+
+            <a href="{% url 'settings' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all {% if request.resolver_match.url_name == 'settings' %}bg-indigo-50 text-indigo-600{% else %}text-slate-500 hover:bg-slate-50{% endif %}">
+                <i data-lucide="settings" class="w-5 h-5"></i>
+                <span class="text-sm">Settings</span>
+            </a>
+
+            <a href="{% url 'support' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all {% if request.resolver_match.url_name == 'support' %}bg-indigo-50 text-indigo-600{% else %}text-slate-500 hover:bg-slate-50{% endif %}">
+                <i data-lucide="help-circle" class="w-5 h-5"></i>
+                <span class="text-sm">Support</span>
+            </a>
+        </nav>
+
+        <div class="pt-6 mt-6 border-t border-slate-100">
+            <div class="px-4 py-3 mb-4 bg-slate-50 rounded-2xl flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs uppercase">
+                    {{ user.username|slice:":2" }}
+                </div>
+                <div class="overflow-hidden">
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Active User</p>
+                    <p class="text-sm font-bold text-slate-900 truncate tracking-tight">{{ user.username }}</p>
+                </div>
+            </div>
+            
+            <a href="{% url 'logout' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-500 font-bold hover:bg-rose-50 transition-all">
+                <i data-lucide="log-out" class="w-5 h-5"></i>
+                <span class="text-sm">Secure Logout</span>
+            </a>
+        </div>
+    </div>
+</aside>

@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VaultVest | Institutional Wealth{% endblock %}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --brand-indigo: #4f46e5;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        /* Animated Mesh Gradient Background */
+        .mesh-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            background-color: #fcfdfe;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.05) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+        }
+
+        /* Smooth Transitions */
+        .btn-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-smooth:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Sophisticated Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { 
+            background: #e2e8f0; 
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="mesh-gradient"></div>
+    <div class="grain"></div>
+
+    <div id="toast-container" class="fixed top-8 right-8 z-[100] space-y-3 w-full max-w-[380px] pointer-events-none">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="notification-toast pointer-events-auto glass-card flex items-start gap-4 p-4 rounded-2xl animate-in slide-in-from-right-full duration-700 ease-out">
+            <div class="mt-0.5">
+                {% if message.tags == 'success' %}
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                    <i data-lucide="check" class="w-5 h-5"></i>
+                </div>
+                {% elif message.tags == 'error' %}
+                <div class="w-10 h-10 bg-rose-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-200">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </div>
+                {% else %}
+                <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg shadow-slate-200">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="flex-1">
+                <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-[0.1em] mb-1">
+                    {% if message.tags == 'success' %}Confirmed{% elif message.tags == 'error' %}Security Alert{% else %}Notice{% endif %}
+                </h4>
+                <p class="text-sm font-semibold text-slate-700 leading-relaxed">{{ message }}</p>
+            </div>
+
+            <button onclick="closeToast(this)" class="text-slate-300 hover:text-slate-500 transition-colors">
+                <i data-lucide="minus" class="w-4 h-4"></i>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="relative z-10">
+        {% block content %}{% endblock %}
+    </div>
+
+    <a href="https://wa.me/15419563747" target="_blank" 
+       class="fixed bottom-8 right-8 bg-slate-900 text-white w-14 h-14 rounded-2xl shadow-2xl flex items-center justify-center hover:bg-indigo-600 hover:-translate-y-2 transition-all duration-300 z-50">
+        <i data-lucide="message-square" class="w-6 h-6"></i>
+        <span class="absolute -top-1 -right-1 w-3 h-3 bg-indigo-500 rounded-full animate-ping"></span>
+    </a>
+
+    <script>
+        lucide.createIcons();
+
+        function closeToast(btn) {
+            const toast = btn.closest('.notification-toast');
+            toast.style.transform = "translateX(120%)";
+            toast.style.opacity = "0";
+            setTimeout(() => toast.remove(), 500);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const toasts = document.querySelectorAll('.notification-toast');
+            toasts.forEach((toast, index) => {
+                // Staggered auto-remove
+                setTimeout(() => {
+                    toast.style.transform = "translateX(120%)";
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 500);
+                }, 6000 + (index * 1000));
+            });
+        });
+    </script>
+</body>
+</html>
